@@ -8,6 +8,7 @@ class Order(models.Model):
     time_out = models.DateTimeField(null=True)
     cost = models.FloatField(default=0.0)
     take_away = models.BooleanField(default=False)
+    pickup = models.BooleanField(default=False)
     complete = models.BooleanField(default=False)
     staff = models.ForeignKey("Staff", on_delete=models.CASCADE)
     products = models.ManyToManyField("Product", through='ProductOrder')

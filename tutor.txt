@@ -32,3 +32,11 @@ python manage.py migrate
 python manage.py runserver
 
 
+метод filter
+>>> cashiers = Staff.objects.filter(position = Staff.cashier)
+>>> cashiers.values("full_name", "labor_contract") 
+Получим
+<QuerySet [{'full_name': 'Иванов Иван Иванович', 'labor_contract': 1754}, {'full_name': 'Петров Петр Петрович', 'labor_contract': 4355}]>
+
+__gt больше чем
+>>> Product.objects.filter(price__gt = 90.0).values("name")
