@@ -31,6 +31,18 @@ python manage.py migrate
 Старт проекта
 python manage.py runserver
 
+Заполнение
+product_1 = Product(name = "Витая пара 3 м", price = 309.0)
+product_1.save()
+product_2 = Product.objects.create(name = "Витая пара 1 м", price = 109.0)
+
+cashier1 = Staff.objects.create(full_name = "Иванов Иван Иванович",position = cashier, labor_contract = 1754)
+cashier2 = Staff.objects.create(full_name = "Петров Петр Петрович",position = cashier, labor_contract = 4355)
+direct = Staff.objects.create(full_name = "Максимов Максим Максимович",position = director, labor_contract = 1254)
+
+Order.objects.create(staff = cashier1, pickup = False)
+Order.objects.create(staff = cashier2, pickup = True)
+Order.objects.create(staff = cashier1, pickup = True)
 
 метод filter
 >>> cashiers = Staff.objects.filter(position = Staff.cashier)
@@ -40,3 +52,23 @@ python manage.py runserver
 
 __gt больше чем
 >>> Product.objects.filter(price__gt = 90.0).values("name")
+
+Использование двоййного подчёркивания
+>>> Order.objects.filter(staff__labor_contract = 1754).values("staff__full_name", "pickup")
+<QuerySet [{'staff__full_name': 'Иванов Иван Иванович', 'pickup': False}, {'staff__full_name': 'Иванов Иван Иванович', 'pickup': True}]>
+
+
+all()
+Product.objects.all().values("name")
+
+ProductOrder.objects.all() - получить список
+ProductOrder.objects.all().exists() - получить есть ли что в таблице
+
+
+Сортировка - получить отсортированный список
+Product.objects.all().order_by('price').values('name', 'price')
+Product.objects.all().order_by('-price').values('name', 'price')
+
+
+
+Author.objects.filter(age=32).values('name')
