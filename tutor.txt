@@ -1,0 +1,34 @@
+Создаём виртуальное окружение:
+python -m venv venv
+
+Заходим в него:
+venv\scripts\activate
+
+Устанавливаем Django в свежее виртуальное окружение:
+pip install django
+
+И запускаем команду создания проекта:
+(venv) ~/django-projects $ django-admin startproject NewsPaper
+
+Переходим в директорию проекта:
+(venv) ~/django-projects $ cd NewsPaper
+
+создаст новое приложение news
+(venv) ~/django-projects/NewsPaper $ python3 manage.py startapp news
+
+Перейдем в файл NewsPaper/settings.py и найдём там список INSTALLED_APPS:
+добавить в конец 'news'
+
+
+Применим миграции
+python manage.py migrate
+
+Создаём модели баз, после готовим миграции
+python manage.py makemigrations
+и применяем их
+python manage.py migrate
+
+Старт проекта
+python manage.py runserver
+
+
